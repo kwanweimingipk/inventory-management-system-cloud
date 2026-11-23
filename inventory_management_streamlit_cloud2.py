@@ -296,9 +296,17 @@ def dashboard_page():
     st.subheader("Inventory Overview")
     data = dashboard_data()
     cols = st.columns(4)
-    for col, (label, value) in zip(cols, [("Total Products", data["products"]), ("Total Units", data["units"]),
-            ("Total Stock Value", f"RM {data['value']:,.2f}"), ("Low Stock Items", data["low"]) ]):
-        col.metric(label, value)
+    metrics = [
+        ("Total Products", data["products"]),
+        ("Total Units", data["units"]),
+        ("Total Stock Value", f"RM {data['value']:,.2f}"),
+        ("Low Stock Items", data["low"]),
+    ]
+    # 每个 KPI 指标使用独立边框卡片，令 Inventory Overview 更整齐清晰。
+    for col, (label, value) in zip(cols, metrics):
+        with col:
+            with st.container(border=True):
+                st.metric(label, value)
     # 使用分隔线区分关键指标与库存状态，方便快速阅读。
     st.divider()
     products = fetch_products()
