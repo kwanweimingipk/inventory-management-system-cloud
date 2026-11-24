@@ -528,7 +528,7 @@ def analytics_page():
 
 # 【Restock 补货建议页面】展示每项产品的目标库存和建议补货数量。
 def restock_page():
-    st.subheader("Restock")
+    st.subheader("Reorder Planning")
     st.info("Target Stock = max(Minimum Stock × 2, Average Daily Outbound × 14 days).")
     rows = restock_data()
     if rows:
@@ -645,7 +645,7 @@ def main():
         return
 
     # 【页面导航配置】定义侧边栏各页面的内部名称和英文显示名称。
-    pages = {"dashboard":"📊 Dashboard", "products":"📦 Product Management", "stock":"🔁 Inbound / Outbound", "analytics":"📈 Analytics", "restock":"🧠 Restock", "history":"🧾 Transaction History", "password":"🔐 Change Password"}
+    pages = {"dashboard":"📊 Dashboard", "products":"📦 Product Management", "stock":"🔁 Inbound / Outbound", "analytics":"📈 Analytics", "restock":"🧠 Reorder Planning", "history":"🧾 Transaction History", "password":"🔐 Change Password"}
     # 【侧边栏与账户操作】显示当前用户、角色、页面导航、刷新按钮和 Logout。
     with st.sidebar:
         st.markdown("## 📦 Inventory System")
