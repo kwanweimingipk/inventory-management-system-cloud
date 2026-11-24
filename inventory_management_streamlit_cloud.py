@@ -302,10 +302,43 @@ def dashboard_page():
         ("Total Stock Value", f"RM {data['value']:,.2f}"),
         ("Low Stock Items", data["low"]),
     ]
-    # 每个 KPI 指标使用独立边框卡片，令 Inventory Overview 更整齐清晰。
-    for col, (label, value) in zip(cols, metrics):
+   # 【Dashboard KPI 卡片样式】加粗边框，并为四个指标分别添加柔和颜色。
+    st.markdown(
+        """
+        <style>
+        .st-key-metric_card_1 {
+            border: 2px solid #9CC7F5 !important;
+            border-radius: 12px !important;
+            padding: 14px 16px !important;
+            background: rgba(156, 199, 245, 0.12) !important;
+        }
+        .st-key-metric_card_2 {
+            border: 2px solid #A8DCCF !important;
+            border-radius: 12px !important;
+            padding: 14px 16px !important;
+            background: rgba(168, 220, 207, 0.12) !important;
+        }
+        .st-key-metric_card_3 {
+            border: 2px solid #F1D39A !important;
+            border-radius: 12px !important;
+            padding: 14px 16px !important;
+            background: rgba(241, 211, 154, 0.14) !important;
+        }
+        .st-key-metric_card_4 {
+            border: 2px solid #EFB8BE !important;
+            border-radius: 12px !important;
+            padding: 14px 16px !important;
+            background: rgba(239, 184, 190, 0.12) !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # 每个 KPI 指标使用独立的彩色加粗边框卡片。
+    for index, (col, (label, value)) in enumerate(zip(cols, metrics), start=1):
         with col:
-            with st.container(border=True):
+            with st.container(border=True, key=f"metric_card_{index}"):
                 st.metric(label, value)
     # 使用分隔线区分关键指标与库存状态，方便快速阅读。
     st.divider()
