@@ -528,7 +528,7 @@ def analytics_page():
 
 # 【Restock 补货建议页面】展示每项产品的目标库存和建议补货数量。
 def restock_page():
-    st.subheader("Restock")
+    st.subheader("Reorder Planning")
     st.info("Target Stock = max(Minimum Stock × 2, Average Daily Outbound × 14 days).")
     rows = restock_data()
     if rows:
